@@ -1,26 +1,27 @@
-import React, { Suspense, lazy } from 'react';
-import './App.css';
+import React, { Suspense, lazy } from "react";
+import "./App.css";
 
 // TODO: importer le composant Header depuis le MFE distant
 // Indice: React.lazy() + import dynamique
+const Header = React.lazy(() => import("mfeHeader/Navbar"));
 
 function HeaderFallback() {
-  return (
-    <div className="header-loading">
-      Chargement du Header...
-    </div>
-  );
+  return <div className="header-loading">Chargement du Header...</div>;
 }
 
 function App() {
   return (
     <div className="shell">
       {/* TODO: afficher le Header ici avec un Suspense */}
-
+      <Suspense fallback={HeaderFallback()}>
+        <Header />
+      </Suspense>
       <main className="shell-content">
         <div className="placeholder">
           <h2>Shell Operationnel</h2>
-          <p>Le Header devrait apparaitre au-dessus quand le MFE sera branche.</p>
+          <p>
+            Le Header devrait apparaitre au-dessus quand le MFE sera branche.
+          </p>
         </div>
       </main>
 
