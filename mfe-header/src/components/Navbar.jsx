@@ -1,7 +1,19 @@
-import React from 'react';
-import './Navbar.css';
+import React, { useState, useEffect } from "react";
+import eventBus from "shared/eventBus";
+import "./Navbar.css";
 
-function Navbar({ notifications = 0 }) {
+function Navbar() {
+  const [notifications, setNotifications] = useState(0);
+
+  useEffect(() => {
+    // TODO: quand un joueur rejoint une partie, incrementer le badge notifications
+    // Penser au cleanup React
+    const unsubscribe = eventBus.on("game:joined", (data) => {
+      setNotifications((prev) => prev + 1);
+    });
+    return unsubscribe;
+  }, []);
+
   return (
     <nav className="navbar">
       <div className="navbar-brand">
