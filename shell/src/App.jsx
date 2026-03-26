@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="shell">
       {/* TODO: afficher le Header ici avec un Suspense */}
-      <Suspense fallback={HeaderFallback()}>
+      <Suspense fallback={<HeaderFallback />}>
         <Header />
       </Suspense>
       <main className="shell-content">
