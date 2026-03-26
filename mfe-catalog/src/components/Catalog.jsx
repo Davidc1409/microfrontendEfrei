@@ -15,10 +15,10 @@ function ProductCard({ product }) {
   const handleAddToCart = () => {
     // TODO: emettre un evenement pour ajouter ce produit au panier
     eventBus.emit("product:added", {
-      productId: product.id,
-      productName: product.name,
-      productPrice: product.price,
-      productImage: product.image,
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
     });
     alert(`Vous avez rejoint : ${product.name}`);
   };

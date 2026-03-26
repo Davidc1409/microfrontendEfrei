@@ -4,6 +4,7 @@ import "./App.css";
 const Header = lazy(() => import("mfeHeader/Navbar"));
 const Lobby = lazy(() => import("mfeLobby/Lobby"));
 const Catalog = lazy(() => import("mfeCatalog/Catalog"));
+const Cart = lazy(() => import("mfeCart/Cart"));
 // TODO: importer le Catalog
 
 function LoadingFallback({ name }) {
@@ -30,6 +31,12 @@ function App() {
               <Catalog />
             </Suspense>
             {/* TODO: afficher le Catalog ici avec un Suspense */}
+          </section>
+
+          <section className="section">
+            <Suspense fallback={<LoadingFallback name="Cart" />}>
+              <Cart />
+            </Suspense>
           </section>
         </div>
       </main>
