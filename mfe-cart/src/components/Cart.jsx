@@ -1,32 +1,26 @@
-import React, { useState, useEffect } from "react";
-import eventBus from "shared/eventBus";
-import "./Cart.css";
+import React, { useState, useEffect } from 'react';
+import eventBus from 'shared/eventBus';
+import './Cart.css';
 
 function Cart() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // TODO 1: s'abonner aux ajouts au panier et mettre a jour le state items
-    const unsub = eventBus.on("product:added", (data) => {
-      setItems([...items, data]);
+    const unsubscribe = eventBus.on('cart:add', (product) => {
+      setItems(prev => [...prev, { ...product, cartId: Date.now() }]);
     });
-    return () => unsub();
-  });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
-    // TODO 2: emettre un evenement quand le panier change
-    let totalPrice = items.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.price,
-      0,
-    );
-    eventBus.emit("cart:updated", {
-      numberOfItems: items.length,
-      cartTotalPrice: totalPrice,
+    eventBus.emit('cart:updated', {
+      count: items.length,
+      total: items.reduce((sum, item) => sum + item.price, 0),
     });
   }, [items]);
 
   const handleRemove = (cartId) => {
-    setItems((prev) => prev.filter((item) => item.cartId !== cartId));
+    setItems(prev => prev.filter(item => item.cartId !== cartId));
   };
 
   const handleClear = () => {
@@ -51,7 +45,7 @@ function Cart() {
       ) : (
         <>
           <div className="cart-items">
-            {items.map((item) => (
+            {items.map(item => (
               <div key={item.cartId} className="cart-item">
                 <div className="item-info">
                   <span className="item-name">{item.name}</span>
@@ -76,7 +70,9 @@ function Cart() {
               <button className="clear-button" onClick={handleClear}>
                 Vider le panier
               </button>
-              <button className="checkout-button">Commander</button>
+              <button className="checkout-button">
+                Commander
+              </button>
             </div>
           </div>
         </>

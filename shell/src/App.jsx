@@ -3,9 +3,8 @@ import "./App.css";
 
 const Header = lazy(() => import("mfeHeader/Navbar"));
 const Lobby = lazy(() => import("mfeLobby/Lobby"));
-const Catalog = lazy(() => import("mfeCatalog/Catalog"));
+const Catalog = lazy(() => import("mfeCatalog/CatalogView"));
 const Cart = lazy(() => import("mfeCart/Cart"));
-// TODO: importer le Catalog
 
 function LoadingFallback({ name }) {
   return <div className="loading-fallback">Chargement {name}...</div>;
@@ -19,7 +18,7 @@ function App() {
       </Suspense>
 
       <main className="shell-content">
-        <div className="content-grid">
+        <div className="content-grid-3">
           <section className="section">
             <Suspense fallback={<LoadingFallback name="Lobby" />}>
               <Lobby />
@@ -30,7 +29,6 @@ function App() {
             <Suspense fallback={<LoadingFallback name="Catalog" />}>
               <Catalog />
             </Suspense>
-            {/* TODO: afficher le Catalog ici avec un Suspense */}
           </section>
 
           <section className="section">
@@ -42,7 +40,10 @@ function App() {
       </main>
 
       <footer className="shell-footer">
-        <p>Shell (3000) | Header (3001) | Lobby (3002) | Catalog (3003)</p>
+        <p>
+          Shell (3000) | Header (3001) | Lobby (3002) | Catalog (3003) | Cart
+          (3004)
+        </p>
       </footer>
     </div>
   );

@@ -50,7 +50,6 @@ module.exports = {
         mfeLobby: "mfeLobby@http://localhost:3002/remoteEntry.js",
         mfeCatalog: "mfeCatalog@http://localhost:3003/remoteEntry.js",
         mfeCart: "mfeCart@http://localhost:3004/remoteEntry.js",
-        // TODO: declarer mfe-catalog comme remote
       },
       shared: {
         react: { singleton: true, requiredVersion: "^18.2.0" },
