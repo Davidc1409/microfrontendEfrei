@@ -15,19 +15,14 @@ function Cart() {
 
   useEffect(() => {
     // TODO 2: emettre un evenement quand le panier change
-    console.log(items);
-    if (items.length > 0) {
-      let totalPrice = items.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.price,
-        0,
-      );
-      console.log(totalPrice);
-      eventBus.emit("cart:updated", {
-        numberOfItems: items.length,
-        cartTotalPrice: totalPrice,
-      });
-    }
-    // alert(`Total price : ${totalPrice}`);
+    let totalPrice = items.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.price,
+      0,
+    );
+    eventBus.emit("cart:updated", {
+      numberOfItems: items.length,
+      cartTotalPrice: totalPrice,
+    });
   }, [items]);
 
   const handleRemove = (cartId) => {
